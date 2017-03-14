@@ -31,7 +31,7 @@ $ python manage.py migrate --settings=tp_python_realex_example.settings.dev
 ### Run Server
 
 ```bash
-$ python manage.py runserver 8000 --settings=tp_python_realex_example.settings.dev
+$ python manage.py runserver 8888 --settings=tp_python_realex_example.settings.dev
 ```
 
 * Note: To use an alternative port is used, then also be sure to update the REALEX_CALLBACK_URL within the dev.py settings file as the callback is also points to this server.
