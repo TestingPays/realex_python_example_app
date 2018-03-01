@@ -46,11 +46,12 @@ def three_d_secure(request):
                                       card_type=request.POST['card_type'])
 
     if response['enrolled'] == 'Y':
+        request_id = response['message'].split(" - ")[1]
         response = Realex.redirect_to_secure_site(third_party_url=response['url'],
                                                   pareq=response['pareq'],
                                                   merchant_data=_encrypt_and_encode_merchant_data(request_body,
                                                                                                   response),
-                                                  request_id='tp_python_realex_example')
+                                                  request_id=request_id)
         return HttpResponse(response.text)
     else:
         return HttpResponse(json.dumps(response), content_type="application/json")
