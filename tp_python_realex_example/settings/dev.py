@@ -8,7 +8,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-TESTINGPAYS_API_KEY = "<your testingpays api key here>"
+TESTINGPAYS_API_KEY = os.environ.get("TP_API_KEY")
 
 REALEX_URL = "https://api.testingpays.com/{0}/realex/v1/auth".format(TESTINGPAYS_API_KEY)
 
