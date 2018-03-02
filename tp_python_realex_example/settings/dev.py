@@ -12,7 +12,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "mq(v8&i$ua(a&_@@$kd*7dglot32bbs7#nu*o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['realex-3d-secure-example.herokuapp.com']
 
 TESTINGPAYS_API_KEY = os.environ.get("TP_API_KEY")
 
