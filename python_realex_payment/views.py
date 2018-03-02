@@ -5,6 +5,8 @@ from django.http import HttpResponse
 from realex.realex import Realex
 import base64
 import json
+from django.views.decorators.csrf import csrf_exempt
+
 
 Realex.SHARED_SECRET = settings.REALEX_SHARED_SECRET
 Realex.AUTH_URL = settings.REALEX_URL
@@ -67,18 +69,18 @@ def _encrypt_merchant_data(merchant_data):
 
 
 def _extract_merchant_data(request_body, response):
-    return str.encode(str(bytes.decode(request_body) + '&' + 'order_id=' + response['order_id'] + '&' + 'sha1hash=' + response['sha1hash']))
+    return str.encode(str(bytes.decode(request_body) + '&' + 'order_id=' + response['order_id']))
 
 
-@require_http_methods(['GET'])
+@require_http_methods(['POST'])
+@csrf_exempt
 def three_ds_verify_signed(request):
-    pa_res = request.GET.get('PaRes', '')
-    merchant_data = _decrypt_and_decode_merchant_data(request.GET.get('MD', ''))
+    pa_res = request.POST.get('PaRes', '')
+    merchant_data = _decrypt_and_decode_merchant_data(request.POST.get('MD', ''))
 
     response = Realex.verify_signed(amount=merchant_data['amount'],
                                     currency=merchant_data['currency'],
                                     pares=pa_res,
-                                    sha1hash=merchant_data['sha1hash'],
                                     order_id=merchant_data['order_id'])
 
     if response['realex_result_code'] == '00' and (response['status'] == 'Y' or response['status'] == 'A'):
