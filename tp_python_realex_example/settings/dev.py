@@ -1,4 +1,10 @@
 from tp_python_realex_example.settings.base import *
+import dj_database_url
+
+# Use a postgres DB
+db_url = os.environ.get("DATABASE_URL")
+if db_url:
+    DATABASES['default'] = dj_database_url.parse(db_url, conn_max_age=600)
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY", "mq(v8&i$ua(a&_@@$kd*7dglot32bbs7#nu*o77g^88+q(wpv3")
