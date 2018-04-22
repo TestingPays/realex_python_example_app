@@ -16,22 +16,22 @@ ALLOWED_HOSTS = ['realex-3d-secure-example.herokuapp.com']
 
 TESTINGPAYS_API_KEY = os.environ.get("TP_API_KEY")
 
-REALEX_URL = "https://api.testingpays.com/{0}/realex/v1/auth".format(TESTINGPAYS_API_KEY)
+REALEX_URL = "http://localhost:8000/{0}/realex/v1/services".format(TESTINGPAYS_API_KEY)
 
 REALEX_VERIFY_SIGNED_URL = os.environ.get("REALEX_VERIFY_SIGNED_URL",
-                                            "https://api.testingpays.com/{0}/realex/v1/3ds_verifysig".format(TESTINGPAYS_API_KEY))
+                                            "http://localhost:8000/{0}/realex/v1/services".format(TESTINGPAYS_API_KEY))
 
 REALEX_VERIFY_ENROLLED_URL = os.environ.get("REALEX_VERIFY_ENROLLED_URL",
-                                            "https://api.testingpays.com/{0}/realex/v1/3ds_verifyenrolled".format(TESTINGPAYS_API_KEY))
+        "http://localhost:8000/{0}/realex/v1/services".format(TESTINGPAYS_API_KEY))
 
 REALEX_CALLBACK_URL = os.environ.get("REALEX_CALLBACK_URL",
-                                            "http://127.0.0.1:8888/threedsverifysig")
+                                            "http://127.0.0.1:8888/threedsverifysig/")
 
 REALEX_MERCHANT_ID = os.environ.get("REALEX_MERCHANT_ID",
                                             TESTINGPAYS_API_KEY)
 
 REALEX_SHARED_SECRET = os.environ.get("REALEX_SHARED_SECRET",
-                                            "my_realex_shared_key") #Note you can use any string here when testing against testing pays
+                                            "SharedSecret") #Note you can use any string here when testing against testing pays
 
 STATIC_URL = '/static/'
 
